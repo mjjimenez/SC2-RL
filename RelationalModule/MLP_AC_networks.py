@@ -51,7 +51,7 @@ class Actor(nn.Module):
         if debug: print("logits: ", logits)
         mask = self.get_action_mask(available_actions)
         if debug: print("mask: ", mask)
-        logits[mask] = torch.tensor(np.NINF)
+        logits[mask] = torch.tensor(np.NINF, device=logits.device)
         if debug: print("logits (after mask): ", logits)
         log_probs = F.log_softmax(logits, dim=-1)
         return log_probs
